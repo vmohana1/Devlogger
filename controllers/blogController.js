@@ -16,7 +16,8 @@ blogRouter.route('/')
   })
   .get((req, res) => {
     // res.setHeader('Content-Type', 'text/json');
-    Posts.find({})
+    const user = req.session.user;
+    Posts.find({ postedOwner: user })
       .then(data => {
         res.end(JSON.stringify(data));
       })
